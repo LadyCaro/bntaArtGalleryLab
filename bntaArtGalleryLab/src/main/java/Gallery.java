@@ -1,16 +1,16 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Gallery {
     private String name;
     private int till;
     private ArrayList<Artwork> stock;
-    private Artwork artwork;
 
     public Gallery(String inputName){
         this.name = inputName;
         this.till = 0;
         this.stock = new ArrayList<>();
-        artwork = new Artwork();
+
 
     }
 
@@ -26,20 +26,30 @@ public class Gallery {
         return this.till;
     }
 
-    public void setTill(String inputAmount){
-        this.name = inputAmount;
+    public void setTill(Artwork currentArtwork){
+        this.till += currentArtwork.getPrice();
     }
 
-    public Artwork getArtwork(){
-        return this.artwork;
+
+    public ArrayList<Artwork> getStock() {
+        return stock;
     }
 
-    public ArrayList getStock(){
-        return this.stock;
+    public void setStock(Artwork currentArtwork){
+        this.stock.add(new Artwork(currentArtwork.getTitle(), currentArtwork.getArtist().getName(),currentArtwork.getPrice()));
     }
 
-    public void setStock(){
-        this.stock.add(getArtwork());
+    public void sellArtwork(Artwork currentArtwork){
+        stock.remove(currentArtwork);
+
+    }
+
+    public void stockTake(){
+        int stockTake = 0;
+        for (int i = 0; i < stock.size(); i++) {
+            stockTake+=stock.get(i).getPrice();
+        }
+        System.out.println("Gallery Collection Value £" + stockTake);
     }
 
 
